@@ -43,18 +43,11 @@ public class SelectionSort {
         System.out.println();
 
         // 1.2.5 测试SelectionSort的速度
-        int size = 10000, bound = 10000;
-        Integer[] arr2 = RandomArrayGenerator.generateRandomArray(size, bound);
-        double startTime = System.nanoTime();
-        SelectionSort.sort(arr2);
-        double endTime = System.nanoTime();
-        double time = (endTime - startTime) / 1000000000.0;
-        // 测试selection sort是否sort成功
-        if (!SortingHelper.isSorted(arr2)) {
-            throw new RuntimeException("Selection Sort failed");
+        int[] dataSize = {10000, 100000};
+        for (int n : dataSize) {
+            Integer[] arr2 = RandomArrayGenerator.generateRandomArray(n, n);
+            SortingHelper.sortTest("SelectionSort", arr2);
         }
-        System.out.println(time + "s");
-
     }
 
 }

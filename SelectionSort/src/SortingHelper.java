@@ -9,4 +9,17 @@ public class SortingHelper {
         }
         return true;
     }
+
+    public static <E extends Comparable<E>> void sortTest(String sortMethod, E[] arr) {
+        double startTime = System.nanoTime();
+        if (sortMethod.equals("SelectionSort")) {
+            SelectionSort.sort(arr);
+        }
+        double endTime = System.nanoTime();
+        double time = (endTime - startTime) / 1000000000.0;
+        if (!SortingHelper.isSorted(arr)) {
+            throw new RuntimeException(sortMethod + "failed");
+        }
+        System.out.println(String.format("%s, n = %d : %f s", sortMethod, arr.length, time));
+    }
 }
