@@ -24,10 +24,19 @@ public class SelectionSort {
 
     public static void main(String[] args) {
         // 因为要接受泛型数组，这里要一个类Integer，而不能是一个基本数据类型int
-        Integer[] arr = {1, 4, 6, 2, 7, 5, 3};
-        SelectionSort.sort(arr);
-        for (int e : arr) {
-            System.out.print(e + " ");
+//        Integer[] arr = {1, 4, 6, 2, 7, 5, 3};
+//        SelectionSort.sort(arr);
+//        for (int e : arr) {
+//            System.out.print(e + " ");
+//        }
+//        System.out.println();
+        Student[] students = {new Student("Alice", 90),
+                                new Student("Jake", 88),
+                                new Student("Erin", 100)};
+        Student Erin = new Student("Erin", 100);
+        SelectionSort.sort(students);
+        for (Student s : students) {
+            System.out.print(s + " ");
         }
         System.out.println();
     }
