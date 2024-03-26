@@ -15,6 +15,21 @@ public class SelectionSort {
         }
     }
 
+    /*
+    * 另一种方式实现Selection Sort
+    * */
+    public static <E extends Comparable<E>> void sort2(E[] arr) {
+        for (int i = arr.length - 1; i >= 0; i--) {
+            int maxIdx = i;
+            for (int j = i; j >= 0; j--) {
+                if (arr[j].compareTo(arr[maxIdx]) > 0) {
+                    maxIdx = j;
+                }
+            }
+            swap(arr, i, maxIdx);
+        }
+    }
+
     private static <E> void swap(E[] arr, int i, int minIdx) {
         // swap也要相应改成接受泛型
         E temp = arr[i];
@@ -25,7 +40,7 @@ public class SelectionSort {
     public static void main(String[] args) {
         // 因为要接受泛型数组，这里要一个类Integer，而不能是一个基本数据类型int
         Integer[] arr = {1, 4, 6, 2, 7, 5, 3};
-        SelectionSort.sort(arr);
+        SelectionSort.sort2(arr);
         for (int e : arr) {
             System.out.print(e + " ");
         }
@@ -34,9 +49,10 @@ public class SelectionSort {
         // 1.2.4 测试写Student类里的Comparable
         Student[] students = {new Student("Alice", 90),
                                 new Student("Jake", 88),
-                                new Student("Erin", 100)};
+                                new Student("Erin", 100),
+                                new Student("Brian", 67)};
         Student Erin = new Student("Erin", 100);
-        SelectionSort.sort(students);
+        SelectionSort.sort2(students);
         for (Student s : students) {
             System.out.print(s + " ");
         }
