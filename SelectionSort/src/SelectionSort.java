@@ -24,12 +24,14 @@ public class SelectionSort {
 
     public static void main(String[] args) {
         // 因为要接受泛型数组，这里要一个类Integer，而不能是一个基本数据类型int
-//        Integer[] arr = {1, 4, 6, 2, 7, 5, 3};
-//        SelectionSort.sort(arr);
-//        for (int e : arr) {
-//            System.out.print(e + " ");
-//        }
-//        System.out.println();
+        Integer[] arr = {1, 4, 6, 2, 7, 5, 3};
+        SelectionSort.sort(arr);
+        for (int e : arr) {
+            System.out.print(e + " ");
+        }
+        System.out.println();
+
+        // 1.2.4 测试写Student类里的Comparable
         Student[] students = {new Student("Alice", 90),
                                 new Student("Jake", 88),
                                 new Student("Erin", 100)};
@@ -39,6 +41,20 @@ public class SelectionSort {
             System.out.print(s + " ");
         }
         System.out.println();
+
+        // 1.2.5 测试SelectionSort的速度
+        int size = 10000, bound = 10000;
+        Integer[] arr2 = RandomArrayGenerator.generateRandomArray(size, bound);
+        double startTime = System.nanoTime();
+        SelectionSort.sort(arr2);
+        double endTime = System.nanoTime();
+        double time = (endTime - startTime) / 1000000000.0;
+        // 测试selection sort是否sort成功
+        if (!SortingHelper.isSorted(arr2)) {
+            throw new RuntimeException("Selection Sort failed");
+        }
+        System.out.println(time + "s");
+
     }
 
 }
