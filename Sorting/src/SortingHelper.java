@@ -14,6 +14,8 @@ public class SortingHelper {
         double startTime = System.nanoTime();
         if (sortMethod.equals("SelectionSort")) {
             SelectionSort.sort(arr);
+        } else if (sortMethod.equals("InsertionSort")) {
+            InsertionSort.sort(arr);
         }
         double endTime = System.nanoTime();
         double time = (endTime - startTime) / 1000000000.0;

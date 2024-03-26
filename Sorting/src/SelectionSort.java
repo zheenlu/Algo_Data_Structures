@@ -61,7 +61,7 @@ public class SelectionSort {
         // 1.2.5 测试SelectionSort的速度
         int[] dataSize = {10000, 100000};
         for (int n : dataSize) {
-            Integer[] arr2 = RandomArrayGenerator.generateRandomArray(n, n);
+            Integer[] arr2 = ArrayGenerator.generateRandomArray(n, n);
             SortingHelper.sortTest("SelectionSort", arr2);
         }
     }

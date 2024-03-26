@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public class ArrayGenerator {
     private ArrayGenerator(){}
 
@@ -8,4 +10,5 @@ public class ArrayGenerator {
         }
         return arr;
     }
+
 }

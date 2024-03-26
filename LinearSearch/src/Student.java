@@ -1,7 +1,7 @@
 public class Student {
     private String name;
 
-    public Student(String name) {
+    public Student(String name, int score) {
         this.name = name;
     }
 
@@ -25,7 +25,9 @@ public class Student {
         return this.name.equals(student.name);
     }
 
-    // 如果重写 equals，通常也需要重写 hashCode
+    /**
+     * 如果重写 equals，通常也需要重写 hashCode
+     * */
     @Override
     public int hashCode() {
         return name != null ? name.hashCode() : 0;
