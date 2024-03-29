@@ -34,7 +34,37 @@ public class Array {
         return data.length;
     }
 
+    /**
+     * 检查数组是否为空
+     * @return
+     */
     public boolean isEmpty() {
         return size == 0;
     }
+
+    /**
+     * 插入到指定index
+     */
+    public void insert(int index, int e) {
+        if (size == data.length) {
+            throw new IllegalArgumentException("Insert failed. Array full");
+        }
+        if (index < 0 || index > size) {
+            throw new IllegalArgumentException("Insert failed. require index >= 0 || index <= size");
+        }
+        for (int i = size - 1; i >= index; i--) {
+            data[i + 1] = data[i];
+        }
+        data[index] = e;
+        size++;
+    }
+
+    public void addFirst(int e) {
+        insert(0, e);
+    }
+
+    public void addLast(int e) {
+        insert(size, e);
+    }
+
 }
