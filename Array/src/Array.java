@@ -115,7 +115,7 @@ public class Array<E> {
         data[size] = null; // loitering object != memory leak, 让java垃圾回收机制回收
 
         // 缩容
-        if (size == data.length / 2) {
+        if (size == data.length / 4 && data.length / 2 != 0) {
             resize(data.length / 2);
         }
         return ret;
