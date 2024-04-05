@@ -3,7 +3,7 @@ public class LinkedList<E> {
      * 设置private是为了封装，不希望用户从外部可以改变，用户只要使用就好
      * 只供我们内部使用
      */
-    private class Node<E> {
+    private class Node {
         // public是为了我们可以直接修改元素，不需要写getter, setter
         public E e;
         public Node next;
@@ -109,5 +109,87 @@ public class LinkedList<E> {
      */
     public void addLast(E e) {
         add(size, e);
+    }
+
+    /**
+     * 获得链表的第index(0-based)个位置的元素
+     * 在链表中不是一个常用的操作，练习用：）
+     * @param index
+     * @return
+     */
+    public E get(int index){
+
+        if(index < 0 || index >= size) {
+            throw new IllegalArgumentException("Get failed. Illegal index.");
+        }
+
+        Node cur = dummyHead.next;
+        for(int i = 0 ; i < index ; i ++) {
+            cur = cur.next;
+        }
+        return cur.e;
+    }
+
+    /**
+     * 获得链表的第一个元素
+     */
+    public E getFirst(){
+        return get(0);
+    }
+
+    /**
+     * 获得链表的最后一个元素
+     * @return
+     */
+    public E getLast(){
+        return get(size - 1);
+    }
+
+    /**
+     * 修改链表的第index(0-based)个位置的元素为e
+     * 在链表中不是一个常用的操作，练习用：）
+     * @param index
+     * @param e
+     */
+    public void set(int index, E e) {
+        if(index < 0 || index >= size) {
+            throw new IllegalArgumentException("Set failed. Illegal index.");
+        }
+        Node cur = dummyHead.next;
+        for (int i = 0; i < index; i++) {
+            cur = cur.next;
+        }
+        cur.e = e;
+    }
+
+    /**
+     * 查找链表中是否有元素e
+     * @param e
+     * @return
+     */
+    public boolean contains(E e) {
+        Node cur = dummyHead.next;
+        while (cur != null) {
+            if (cur.e.equals(e)) {
+                return true;
+            }
+            cur = cur.next;
+        }
+        return false;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder res = new StringBuilder();
+        Node cur = dummyHead.next;
+        while (cur != null) {
+            res.append(cur + "->");
+            cur = cur.next;
+        }
+        // for loop写法
+//        for (Node cur = dummyHead.next; cur != null; cur = cur.next)
+        res.append("NULL");
+
+        return res.toString();
     }
 }
