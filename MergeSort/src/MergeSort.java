@@ -3,7 +3,22 @@ import java.util.Arrays;
 public class MergeSort {
     private MergeSort(){};
 
-    public static <E extends Comparable<E>> void sort(E[] arr) {}
+    public static <E extends Comparable<E>> void sort(E[] arr) {
+        sort(arr, 0, arr.length - 1);
+    }
+
+    private static <E extends Comparable<E>> void sort(E[] arr, int l, int r) {
+        // 没有元素或只有一个元素情况
+        if (l >= r) {
+            return;
+        }
+
+        int mid = l + (r - l) / 2;
+        sort(arr, l, mid);
+        sort(arr, mid + 1, r);
+        merge(arr, l, mid, r);
+    }
+
 
     /**
      * 合并两个有序的区间 arr[l, mid] 和 arr[mid + 1, r]
@@ -40,4 +55,9 @@ public class MergeSort {
         }
     }
 
+    public static void main(String[] args) {
+        int n = 100000;
+        Integer[] arr = ArrayGenerator.generateRandomArray(n, n);
+        SortingHelper.sortTest("MergeSort", arr);
+    }
 }
