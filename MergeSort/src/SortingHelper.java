@@ -20,6 +20,8 @@ public class SortingHelper {
             InsertionSort.sort2(arr);
         } else if (sortMethod.equals("MergeSort")) {
             MergeSort.sort(arr);
+        } else if (sortMethod.equals("MergeSorr2")) {
+            MergeSort.sort2(arr);
         }
 
         double endTime = System.nanoTime();
