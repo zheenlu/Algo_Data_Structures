@@ -46,6 +46,7 @@ public class InsertionSort {
             arr[j] = temp;
         }
     }
+
     private static <E> void swap(E[] arr, int i, int j) {
         E temp = arr[i];
         arr[i] = arr[j];

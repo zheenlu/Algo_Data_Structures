@@ -46,6 +46,24 @@ public class InsertionSort {
             arr[j] = temp;
         }
     }
+
+    /**
+     * 在MergeSort.sort2()里引用，为MergeSort优化
+     * @param arr
+     * @param r
+     * @param <E>
+     */
+    public static <E extends Comparable<E>> void sort4(E[] arr, int l, int r) {
+        for (int i = l; i < r; i++) {
+            E temp = arr[i];
+            int j;
+            for (j = i; j - 1 >= l && temp.compareTo(arr[j - 1]) < 0; j--) {
+                arr[j] = arr[j - 1];
+            }
+            arr[j] = temp;
+        }
+    }
+
     private static <E> void swap(E[] arr, int i, int j) {
         E temp = arr[i];
         arr[i] = arr[j];
@@ -61,4 +79,6 @@ public class InsertionSort {
             SortingHelper.sortTest("InsertionSort2", arr2);
         }
     }
+
+
 }

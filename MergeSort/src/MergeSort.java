@@ -3,13 +3,10 @@ import java.util.Arrays;
 public class MergeSort {
 
     private MergeSort(){}
-
     public static <E extends Comparable<E>> void sort(E[] arr) {
         sort(arr, 0, arr.length - 1);
     }
-
     private static <E extends Comparable<E>> void sort(E[] arr, int l, int r) {
-        // 没有元素或只有一个元素情况
         if (l >= r) {
             return;
         }
@@ -17,25 +14,29 @@ public class MergeSort {
         int mid = l + (r - l) / 2;
         sort(arr, l, mid);
         sort(arr, mid + 1, r);
-        merge(arr, l, mid, r);
+        // 优化1
+        if (arr[mid].compareTo(arr[mid + 1]) > 0) {
+            merge(arr, l, mid, r);
+        }
     }
-
 
     public static <E extends Comparable<E>> void sort2(E[] arr) {
         sort2(arr, 0, arr.length - 1);
     }
     private static <E extends Comparable<E>> void sort2(E[] arr, int l, int r) {
-        if (l >= r) {
+//        if (l >= r) {
+//            return;
+//        }
+        // 优化2
+        if (l - r >= 15) {
+            InsertionSort.sort4(arr, l, r);
             return;
         }
 
         int mid = l + (r - l) / 2;
         sort2(arr, l, mid);
         sort2(arr, mid + 1, r);
-        // 如果前半个从小到大sorted arr的最后一个元素arr[mid]
-        // 已经比后半个从小到大sorted arr的第一个元素arr[mid + 1]小
-        // 那么不用比较再merge()了
-        // 加上这个if会对完全有序或者近乎有序的数组性能大大提升
+        // 优化1
         if (arr[mid].compareTo(arr[mid + 1]) > 0) {
             merge(arr, l, mid, r);
         }
@@ -69,13 +70,13 @@ public class MergeSort {
     }
 
     public static void main(String[] args) {
-        int n = 1000000;
+        int n = 5000000;
         Integer[] arr = ArrayGenerator.generateRandomArray(n, n);
         Integer[] orderedArr = ArrayGenerator.generateOrderedArray(n);
-//        SortingHelper.sortTest("MergeSort", arr);
-//        SortingHelper.sortTest("MergeSort2", arr);
+        SortingHelper.sortTest("MergeSort", arr);
+        SortingHelper.sortTest("MergeSort2", arr);
 
-        SortingHelper.sortTest("MergeSort", orderedArr);
-        SortingHelper.sortTest("MergeSort2", orderedArr);
+//        SortingHelper.sortTest("MergeSort", orderedArr);
+//        SortingHelper.sortTest("MergeSort2", orderedArr);
     }
 }
