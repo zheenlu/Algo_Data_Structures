@@ -19,29 +19,6 @@ public class MergeSort {
             merge(arr, l, mid, r);
         }
     }
-
-    public static <E extends Comparable<E>> void sort2(E[] arr) {
-        sort2(arr, 0, arr.length - 1);
-    }
-    private static <E extends Comparable<E>> void sort2(E[] arr, int l, int r) {
-//        if (l >= r) {
-//            return;
-//        }
-        // 优化2
-        if (l - r >= 15) {
-            InsertionSort.sort4(arr, l, r);
-            return;
-        }
-
-        int mid = l + (r - l) / 2;
-        sort2(arr, l, mid);
-        sort2(arr, mid + 1, r);
-        // 优化1
-        if (arr[mid].compareTo(arr[mid + 1]) > 0) {
-            merge(arr, l, mid, r);
-        }
-    }
-
     private static <E extends Comparable<E>> void merge(E[] arr, int l, int mid, int r) {
         E[] temp = Arrays.copyOfRange(arr, l, r + 1); // 左闭右开所以 r + 1
 
@@ -64,6 +41,52 @@ public class MergeSort {
                 i++;
             } else {
                 arr[k] = temp[j - l];
+                j++;
+            }
+        }
+    }
+
+    public static <E extends Comparable<E>> void sort2(E[] arr) {
+        // 优化2
+        E[] temp = Arrays.copyOf(arr, arr.length);
+        sort2(arr, 0, arr.length - 1, temp);
+    }
+    private static <E extends Comparable<E>> void sort2(E[] arr, int l, int r, E[] temp) {
+        if (l >= r) {
+            return;
+        }
+        if (l - r >= 15) {
+            InsertionSort.sort4(arr, l, r);
+            return;
+        }
+
+        int mid = l + (r - l) / 2;
+        sort2(arr, l, mid, temp);
+        sort2(arr, mid + 1, r, temp);
+        // 优化1
+        if (arr[mid].compareTo(arr[mid + 1]) > 0) {
+            merge(arr, l, mid, r);
+        }
+    }
+
+    private static <E extends Comparable<E>> void merge2(E[] arr, int l, int mid, int r, E[] temp) {
+        // 不用担心偏移了，因为拷贝arr到temp也是从i开始的
+        System.arraycopy(arr, l, temp, l, r - l + 1);
+        int i = l, j = mid + 1;
+
+        // 每轮循环为 arr[k] 赋值
+        for (int k = l; k <= r; k++) {
+            if (i > mid) { // 左边区间看完了
+                arr[k] = temp[j];
+                j++;
+            } else if (j > r) { // 右边元素看完了
+                arr[k] = temp[i];
+                i++;
+            } else if (temp[i].compareTo(temp[j]) <= 0) {
+                arr[k] = temp[i];
+                i++;
+            } else {
+                arr[k] = temp[j];
                 j++;
             }
         }
