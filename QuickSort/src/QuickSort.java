@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.Random;
 
 public class QuickSort {
     private QuickSort(){};
@@ -16,6 +17,10 @@ public class QuickSort {
     }
 
     public static <E extends Comparable<E>> int partition(E[] arr, int l, int r) {
+        // 生成 [l, r] 之间的随即索引
+        int p = l + (new Random()).nextInt(r - l + 1); // 因为nextInt是开区间，所以+1，保持和[l, r]左闭右闭
+        swap(arr, l, p);
+
         // arr[l+1...j] < v, arr[j+1...r] >= v
         int j = l;
         for (int i = l + 1; i <= r; i++) {
@@ -41,5 +46,11 @@ public class QuickSort {
 
         SortingHelper.sortTest("MergeSort", arr);
         SortingHelper.sortTest("QuickSort", arr);
+
+        arr = ArrayGenerator.generateOrderedArray(n);
+        arr2 = Arrays.copyOf(arr, arr.length);
+
+        SortingHelper.sortTest("MergeSort", arr);
+        SortingHelper.sortTest("QuickSort", arr2);
     }
 }
