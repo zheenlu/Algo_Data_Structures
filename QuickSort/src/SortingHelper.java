@@ -20,10 +20,12 @@ public class SortingHelper {
             InsertionSort.sort2(arr);
         } else if (sortMethod.equals("MergeSort")) {
             MergeSort.sort(arr);
-        } else if (sortMethod.equals("MergeSorrBU")) {
+        } else if (sortMethod.equals("MergeSortBU")) {
             MergeSort.sortBU(arr);
         } else if (sortMethod.equals("QuickSort")) {
             QuickSort.sort(arr);
+        } else if (sortMethod.equals("QuickSort2Ways")) {
+            QuickSort.sort2ways(arr);
         }
 
         double endTime = System.nanoTime();
