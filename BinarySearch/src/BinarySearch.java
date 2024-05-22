@@ -48,9 +48,9 @@ public class BinarySearch {
         }
 
         if (data[mid].compareTo(target) < 0) {
-            return search(data, mid + 1, r, target);
+            return searchR(data, mid + 1, r, target);
         }
 
-        return search(data, l, mid - 1, target);
+        return searchR(data, l, mid - 1, target);
     }
 }
