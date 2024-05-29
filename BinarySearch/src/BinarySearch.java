@@ -28,7 +28,7 @@ public class BinarySearch {
 
 
     /**
-     * 递归是爱你二分查找法
+     * 递归实现二分查找法
      * @param data
      * @param target
      * @return
@@ -98,6 +98,31 @@ public class BinarySearch {
         return u;
     }
 
+    /**
+     * >= target 的最小值索引
+     * @param data
+     * @param target
+     * @return
+     * @param <E>
+     */
+    public static <E extends Comparable<E>> int lower_ceil(E[] data, E target) {
+        int l = 0, r = data.length;
+        // 在 data[l, r] 中寻找解
+        while (l < r) {
+            int mid = l + (r - l) / 2;
+            // 在 upper 中，这里是 data[mid].compareTo(target) <= 0
+            // 但是，对于 lower_ceil 来说，在 data[mid] == target 的时候，有可能是解
+            // 所以在等于的情况下，不能排除掉 data[mid] 的值。在等于的情况下，应该归入下面的 else 中做处理
+            // 也就是，data[mid] == target 的时候可能是解，也可能有更小的解在左边，应该去更新右边界
+            if (data[mid].compareTo(target) < 0) {
+                l = mid + 1;
+            } else {
+                r = mid;
+            }
+        }
+        return l;
+    }
+
 
     public static void main(String[] args) {
 //        Integer[] arr = {1, 1, 3, 3, 5, 5};
@@ -107,9 +132,12 @@ public class BinarySearch {
 //        System.out.println();
 
         Integer[] arr = {1, 1, 3, 3, 5, 5};
-        for (int i = 0; i <= 6; i++) {
-            System.out.print(BinarySearch.ceil(arr, i) + " "); // 0 1 2 3 4 5 6
-        }
+//        for (int i = 0; i <= 6; i++) {
+//            System.out.print(BinarySearch.ceil(arr, i) + " "); // 0 1 2 3 4 5 6
+//        }
+//        System.out.println();
+        for(int i = 0; i <= 6; i ++)
+            System.out.print(BinarySearch.lower_ceil(arr, i) + " ");
         System.out.println();
     }
 
